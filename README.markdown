@@ -9,16 +9,47 @@ What will be installed?
 * Ruby
 * Rails
 * Git
-* MySql *
-* Postgres *
-* Sqlite *
-* Apache *
-* NGinx *
-* Passenger *
+* MySql*
+* Postgres*
+* Sqlite*
+* Apache*
+* NGinx*
+* Passenger*
 * PHP5
 * Various Gems (of your choice)
 
- * Optional
+\* Optional
+
+Usage
+-----
+
+To run this script you should be logged as root (or sudoer user).
+
+Now download the script installer and uncompress it.
+
+    wget http://github.com/cleitonfco/webdev-setup/tarball/master -O webdev-setup.tar.gz
+    tar xzf webdev-setup.tar.gz
+    rm webdev-setup.tar.gz
+    mv cleitonfco-webdev-setup* webdev-setup
+    cd webdev-setup
+
+Run `sudo bash install.sh` and answer to the config dialogs.
+
+### ATTENTION
+
+This script are still in development, any problems or questions, please report me.
+
+TODO
+----
+
+* Add more gems
+* Add essential plugins and styles in Gedit
+* Add Java and Java plugin for Browsers
+
+Author
+------
+
+Copyright © 2009 [Cleiton Francisco](http://cleitonfco.com.br/ "Author's Website"), released under the MIT license
 
 LICENSE:
 --------

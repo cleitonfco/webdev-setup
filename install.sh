@@ -321,10 +321,3 @@ install_passenger_apache
 install_nginx
 install_passenger_nginx
 install_php
-
-#java = <<JAVA
-#echo '>> Instaling Java' &&
-#apt-get install -y sun-java6-jre &&
-#echo '>> Instaling Plugin Java para Browsers' &&
-#apt-get install -y sun-java6-plugin
-#JAVA
