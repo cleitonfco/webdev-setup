@@ -168,7 +168,7 @@ apt-get -y install dialog
 # Ask for Databases
 # ---------------------------------------------------------------------------
 dialog --backtitle "$title" --title "Databases" --separate-output \
-       --checklist "\nSelect below the databases you want to install. Your choices will also be enabled to your rails applications.\n" 12 50 3 \
+       --checklist "\nSelect below the databases you want to install. Your choices will also be enabled to your rails applications.\n" 14 50 3 \
        1 "MySql" off \
        2 "Postgres" off \
        3 "Sqlite" off \
@@ -306,8 +306,8 @@ fi
 
 # Start Setup
 # ---------------------------------------------------------------------------
-apt-get update -qq
-apt-get upgrade -qq
+apt-get update
+apt-get upgrade
 install_ruby
 install_rubygems
 install_rails
@@ -321,3 +321,4 @@ install_passenger_apache
 install_nginx
 install_passenger_nginx
 install_php
+
