@@ -12,7 +12,7 @@ output=`tempfile`
 # ---------------------------------------------------------------------------
 install_ruby() {
   echo "* Instaling Ruby 1.8..."
-  apt-get -y install ruby1.8 ruby1.8-dev irb1.8 ri1.8 rdoc1.8 libopenssl-ruby build-essential libxml-ruby1.8 libxml2-dev libxslt1-dev libreadline-ruby1.8
+  apt-get -y install ruby1.8 ruby1.8-dev irb1.8 ri1.8 rdoc1.8 libopenssl-ruby build-essential libxml-ruby1.8 libxml2-dev libxslt1-dev libreadline-ruby1.8 libnotify-bin
   ln -s /usr/bin/ruby1.8 /usr/bin/ruby
   ln -s /usr/bin/rdoc1.8 /usr/bin/rdoc
   ln -s /usr/bin/ri1.8 /usr/bin/ri
@@ -307,7 +307,6 @@ fi
 # Start Setup
 # ---------------------------------------------------------------------------
 apt-get update
-apt-get upgrade
 install_ruby
 install_rubygems
 install_rails
