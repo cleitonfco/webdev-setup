@@ -48,21 +48,28 @@ install_gem() {
 }
 
 install_gems() {
-  gems='wirble daemons rack rake rcov json hpricot treetop hirb mislav-will_paginate nokogiri passenger'
+  gems='mongrel wirble daemons rake rcov rack rack-rack-contrib json hpricot treetop hirb mislav-will_paginate nokogiri passenger newrelic_rpm tmail'
   echo '* Instaling Gems...'
   gem install $gems --no-ri --no-rdoc
+  install_gem $amqp 'amqp'
   install_gem $authlogic 'authlogic'
-  install_gem $brstring 'brstring'
+  install_gem $autotestrails 'autotest-rails'
+  install_gem $brazilianrails 'brazilian-rails'
   install_gem $capistrano 'capistrano'
   install_gem $capistranoext 'capistrano-ext'
+  install_gem $characterencodings 'character-encodings'
   install_gem $cucumber 'cucumber'
   install_gem $faker 'faker'
   install_gem $github 'github'
+  install_gem $paranoid 'jchupp-is_paranoid'
   install_gem $jsonpure 'json_pure'
+  install_gem $memcached 'memcached'
   install_gem $machinist 'notahat-machinist'
   install_gem $oauth 'oauth'
   install_gem $redgreen 'redgreen'
-  install_gem $remarkable_rails 'remarkable_rails'
+  install_gem $remarkable 'remarkable'
+  install_gem $rmagick 'rmagick'
+  install_gem $robustthread 'robustthread'
   install_gem $rspec 'rspec'
   install_gem $rspecrails 'rspec-rails'
   install_gem $syntax 'syntax'
@@ -168,7 +175,7 @@ apt-get -y install dialog
 # Ask for Databases
 # ---------------------------------------------------------------------------
 dialog --backtitle "$title" --title "Databases" --separate-output \
-       --checklist "\nSelect below the databases you want to install. Your choices will also be enabled to your rails applications.\n" 14 50 3 \
+       --checklist "\nSelect below the databases do you want to install. Your choices will also be enabled to your rails applications.\n" 14 50 3 \
        1 "MySql" off \
        2 "Postgres" off \
        3 "Sqlite" off \
@@ -190,7 +197,7 @@ fi
 # Config Apache Server
 # ---------------------------------------------------------------------------
 dialog --backtitle "$title" --title "Apache Server" --separate-output \
-       --checklist "\nYou want to install the Apache Server?\n" 10 50 1 \
+       --checklist "\nDou you want to install the Apache Server?\n" 10 50 1 \
        1 "With support for Passenger" on \
        2> $output
 input=$?
@@ -206,7 +213,7 @@ fi
 # Config Nginx Server
 # ---------------------------------------------------------------------------
 dialog --backtitle "$title" --title "NGinx Server" --separate-output \
-       --checklist "\nYou want to install the NGinx Server?\n" 10 50 1 \
+       --checklist "\nDo you want to install the NGinx Server?\n" 10 50 1 \
        1 "With support for Passenger" on \
        2> $output
 input=$?
@@ -222,17 +229,17 @@ fi
 # Ask for Gems
 # ---------------------------------------------------------------------------
 dialog --backtitle "$title" --title "Gems" --separate-output \
-       --checklist "\nSelect the gems you want to install (1/3):\n" 25 120 10 \
-       0 "authlogic : A clean, simple, and unobtrusive ruby authentication solution." on \
-       1 "brstring : brstring é uma das gems que compoem o Brazilian Rails" on \
-       2 "capistrano : Simple. The way it should be." on \
-       3 "capistrano-ext : Useful task libraries and methods for Capistrano" on \
-       4 "cucumber : Executable Feature scenarios" on \
-       5 "faker : A port of Perl's Data::Faker - Generates fake names, phone numbers, etc." on \
-       6 "github : The official 'github' command line helper for simplifying your GitHub experience." on \
-       7 "jchupp-is_paranoid : allowing you to hide and restore records without actually deleting them." on \
-       8 "json_pure : A JSON implementation in Ruby" on \
-       9 "notahat-machinist : Fixtures aren't fun. Machinist is." on \
+       --checklist "\nSelect the gems do you want to install:\n" 25 120 10 \
+       0 "amqp : AMQP client implementation in Ruby/EventMachine" on \
+       1 "authlogic : A clean, simple, and unobtrusive ruby authentication solution." on \
+       2 "autotest-rails : This is an autotest plugin to provide rails support" on \
+       3 "brazilian-rails : Conjunto de gems para facilitar a vida dos programadores brasileiros." on \
+       4 "capistrano : Simple. The way it should be." on \
+       5 "capistrano-ext : Useful task libraries and methods for Capistrano" on \
+       6 "character-encodings : A pluggable character-encoding library" on \
+       7 "cucumber : Executable Feature scenarios" on \
+       8 "faker : A port of Perl's Data::Faker - Generates fake names, phone numbers, etc." on \
+       9 "github : The official 'github' command line helper for simplifying your GitHub experience." on \
        2> $output
 
 input=$?
@@ -240,30 +247,30 @@ clear
 
 if [ $input != 1 -a $input != 255 ]; then
   options=`cat $output`
-  authlogic=`expr index "$options" 0`
-  brstring=`expr index "$options" 1`
-  capistrano=`expr index "$options" 2`
-  capistranoext=`expr index "$options" 3`
-  cucumber=`expr index "$options" 4`
-  faker=`expr index "$options" 5`
-  github=`expr index "$options" 6`
-  paranoid=`expr index "$options" 7`
-  jsonpure=`expr index "$options" 8`
-  machinist=`expr index "$options" 9`
+  amqp=`expr index "$options" 0`
+  authlogic=`expr index "$options" 1`
+  autotestrails=`expr index "$options" 2`
+  brazilianrails=`expr index "$options" 3`
+  capistrano=`expr index "$options" 4`
+  capistranoext=`expr index "$options" 5`
+  characterencodings=`expr index "$options" 6`
+  cucumber=`expr index "$options" 7`
+  faker=`expr index "$options" 8`
+  github=`expr index "$options" 9`
 fi
 
 dialog --backtitle "$title" --title "Gems" --separate-output \
-       --checklist "\nSelect the gems you want to install (2/3):\n" 25 120 10 \
-       0 "oauth : OAuth Core Ruby implementation" on \
-       1 "redgreen : redgreen is an expanded version of Pat Eyler's RedGreen" on \
-       2 "remarkable_rails : collection of matchers and macros with I18n for Rails" on \
-       3 "rmagick : Ruby binding to ImageMagick" on \
-       4 "rspec : rspec" on \
-       5 "rspec-rails : rspec for rails" on \
-       6 "syntax : Syntax is Ruby library for performing simple syntax highlighting." on \
-       7 "thin : A thin and fast web server" on \
-       8 "thoughtbot-paperclip : File attachments as attributes for ActiveRecord" on \
-       9 "thoughtbot-shoulda : Making tests easy on the fingers and eyes" on \
+       --checklist "\nSelect the gems do you want to install:\n" 25 120 10 \
+       0 "jchupp-is_paranoid : allowing you to hide and restore records without actually deleting them." on \
+       1 "json_pure : A JSON implementation in Ruby" on \
+       2 "memcached : An interface to the libmemcached C client."
+       3 "notahat-machinist : Fixtures aren't fun. Machinist is." on \
+       4 "oauth : OAuth Core Ruby implementation" on \
+       5 "redgreen : redgreen is an expanded version of Pat Eyler's RedGreen" on \
+       6 "remarkable : a framework for rspec matchers, with support to macros and I18n." on \
+       7 "rmagick : Ruby binding to ImageMagick" on \
+       8 "robustthread : Threads that stay alive" on \
+       9 "rspec : rspec" on \
        2> $output
 
 input=$?
@@ -271,37 +278,46 @@ clear
 
 if [ $input != 1 -a $input != 255 ]; then
   options=`cat $output`
-  oauth=`expr index "$options" 0`
-  redgreen=`expr index "$options" 1`
-  remarkable_rails=`expr index "$options" 2`
-  rmagick=`expr index "$options" 3`
-  rspec=`expr index "$options" 4`
-  rspecrails=`expr index "$options" 5`
-  syntax=`expr index "$options" 6`
-  thin=`expr index "$options" 7`
-  paperclip=`expr index "$options" 8`
-  shoulda=`expr index "$options" 9`
+  paranoid=`expr index "$options" 0`
+  jsonpure=`expr index "$options" 1`
+  memcached=`expr index "$options" 2`
+  machinist=`expr index "$options" 3`
+  oauth=`expr index "$options" 4`
+  redgreen=`expr index "$options" 5`
+  remarkable=`expr index "$options" 6`
+  rmagick=`expr index "$options" 7`
+  robustthread=`expr index "$options" 8`
+  rspec=`expr index "$options" 9`
 fi
 
 dialog --backtitle "$title" --title "Gems" --separate-output \
-       --checklist "\nSelect the gems you want to install (3/3):\n" 15 120 5 \
-       0 "twitter : wrapper for the twitter api (oauth only)" on \
-       1 "vlad : Vlad the Deployer is pragmatic application deployment automation, without mercy" on \
-       2 "webrat : Webrat. Ruby Acceptance Testing for Web applications" on \
-       3 "xmpp4r : XMPP4R is an XMPP/Jabber library for Ruby." on \
-       4 "ZenTest : ZenTest provides 4 different tools: zentest, unit_diff, autotest, and multiruby" on \
+       --checklist "\nSelect the gems do you want to install:\n" 15 120 5 \
+       0 "rspec-rails : rspec for rails" on \
+       1 "syntax : Syntax is Ruby library for performing simple syntax highlighting." on \
+       2 "thin : A thin and fast web server" on \
+       3 "thoughtbot-paperclip : File attachments as attributes for ActiveRecord" on \
+       4 "thoughtbot-shoulda : Making tests easy on the fingers and eyes" on \
+       5 "twitter : wrapper for the twitter api" on \
+       6 "vlad : Vlad the Deployer is pragmatic application deployment automation, without mercy" on \
+       7 "webrat : Webrat. Ruby Acceptance Testing for Web applications" on \
+       8 "xmpp4r : XMPP4R is an XMPP/Jabber library for Ruby." on \
+       9 "ZenTest : ZenTest provides 4 different tools: zentest, unit_diff, autotest, and multiruby" on \
        2> $output
-
 input=$?
 clear
 
 if [ $input != 1 -a $input != 255 ]; then
   options=`cat $output`
-  twitter=`expr index "$options" 0`
-  vlad=`expr index "$options" 1`
-  webrat=`expr index "$options" 2`
-  xmpp4r=`expr index "$options" 3`
-  zentest=`expr index "$options" 4`
+  rspecrails=`expr index "$options" 0`
+  syntax=`expr index "$options" 1`
+  thin=`expr index "$options" 2`
+  paperclip=`expr index "$options" 3`
+  shoulda=`expr index "$options" 4`
+  twitter=`expr index "$options" 5`
+  vlad=`expr index "$options" 6`
+  webrat=`expr index "$options" 7`
+  xmpp4r=`expr index "$options" 8`
+  zentest=`expr index "$options" 9`
 fi
 
 # Start Setup
@@ -321,3 +337,10 @@ install_nginx
 install_passenger_nginx
 install_php
 
+echo "
+------------------------------------------------------
+
+              Webdev Setup Finished!
+
+------------------------------------------------------
+"
