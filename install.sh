@@ -229,7 +229,7 @@ fi
 # Ask for Gems
 # ---------------------------------------------------------------------------
 dialog --backtitle "$title" --title "Gems" --separate-output \
-       --checklist "\nSelect the gems do you want to install:\n" 25 120 10 \
+       --checklist "\nSelect the gems do you want to install:\n" 20 100 10 \
        0 "amqp : AMQP client implementation in Ruby/EventMachine" on \
        1 "authlogic : A clean, simple, and unobtrusive ruby authentication solution." on \
        2 "autotest-rails : This is an autotest plugin to provide rails support" on \
@@ -260,10 +260,10 @@ if [ $input != 1 -a $input != 255 ]; then
 fi
 
 dialog --backtitle "$title" --title "Gems" --separate-output \
-       --checklist "\nSelect the gems do you want to install:\n" 25 120 10 \
+       --checklist "\nSelect the gems do you want to install:\n" 20 100 10 \
        0 "jchupp-is_paranoid : allowing you to hide and restore records without actually deleting them." on \
        1 "json_pure : A JSON implementation in Ruby" on \
-       2 "memcached : An interface to the libmemcached C client."
+       2 "memcached : An interface to the libmemcached C client." on \
        3 "notahat-machinist : Fixtures aren't fun. Machinist is." on \
        4 "oauth : OAuth Core Ruby implementation" on \
        5 "redgreen : redgreen is an expanded version of Pat Eyler's RedGreen" on \
@@ -291,7 +291,7 @@ if [ $input != 1 -a $input != 255 ]; then
 fi
 
 dialog --backtitle "$title" --title "Gems" --separate-output \
-       --checklist "\nSelect the gems do you want to install:\n" 15 120 5 \
+       --checklist "\nSelect the gems do you want to install:\n" 20 100 10 \
        0 "rspec-rails : rspec for rails" on \
        1 "syntax : Syntax is Ruby library for performing simple syntax highlighting." on \
        2 "thin : A thin and fast web server" on \
