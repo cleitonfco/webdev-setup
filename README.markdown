@@ -3,6 +3,8 @@ WebDev Setup
 
 This script prepares a web development environment in your Ubuntu (9.04 compatible).
 
+![Select database](http://s.cleitonfco.com.br/i/wd-setup1.png)
+
 What will be installed?
 -----------------------
 
