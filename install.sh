@@ -131,6 +131,7 @@ install_apache() {
     echo '* Instaling Apache...'
     apt-get -y install apache2 apache2-mpm-prefork apache2-prefork-dev
   fi
+  a2enmod rewrite
   return
 }
 
